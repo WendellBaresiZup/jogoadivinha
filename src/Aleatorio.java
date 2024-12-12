@@ -6,7 +6,7 @@ public class Aleatorio {
 
             Scanner scanner = new Scanner(System.in);
             Random random = new Random();
-            int numero = drawNumber();
+            int numero = numeroEscolhido();
 
 
             // Criando variaveis
@@ -36,7 +36,7 @@ public class Aleatorio {
 
     }
 
-    private static int drawNumber(){
+    private static int numeroEscolhido(){
         return new Random().nextInt(11);
     }
 }
