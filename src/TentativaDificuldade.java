@@ -2,7 +2,8 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Tentativas2 {
+public class TentativaDificuldade {
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -19,55 +20,6 @@ public class Tentativas2 {
         String nome = scanner.nextLine();
 
 
-        System.out.println("Bora jogar " + nome + "\nVou te explicar o jogo \nEu vou escolher um número de 0 a 10, e você tem que adivinhar!!");
-
-
-        while (tentativas < 5){
-            for (int i = 1; i <= 5; i++){
-                //System.out.println("Você " + nome + " tem " + tentativas);
-                System.out.println("Digite um número: ");
-                try {
-                    chute = scanner.nextInt();
-                    if (chute < 1 || chute > 10){
-                        System.out.println("Digite um número: ");
-                        continue;
-                    }
-                    tentativas++;
-
-                    if (chute == numero){
-                        System.out.println("Para você acertou o número " + numero);
-                        pontos = pontos + 10;
-                        break;
-                    } else if (chute == numero - 1 || chute == numero + 1){
-                        pontos = pontos + 5;
-                    }
-
-                    if (chute > numero){
-                        System.out.println("Tente novamente, o número é menor, palpites feitos: " + i);
-                    } else {
-                        System.out.println("Tente novamente, o número é maior, palpites feitos: " + i);
-                    }
-                } catch (InputMismatchException e){
-                    System.out.println("Insira um número válido.");
-                    scanner.next();
-                }
-            }
-            break;
-        }
-
-
-        System.out.println("Bora jogar novamente? SIM(S) ou NÃO(N)");
-        jogarNovamente = scanner.next();
-
-        //if (jogarNovamente != "s"){
-           // System.out.println("O seu saldo de pontos foi: " + pontos);
-            //return;
-
-        if (!jogarNovamente.equalsIgnoreCase("s")){
-
-        }
-
-
         System.out.println("Escolha uma dificuldade!");
         System.out.println("1 = Fácil");
         System.out.println("2 = Médio");
@@ -75,7 +27,7 @@ public class Tentativas2 {
         int menu = scanner.nextInt();
 
 
-        while (menu != 0){
+        while (tentativas < 5){
             switch (menu){
                 case 1:
                     for (int i = 1; i <= 5; i++){
@@ -109,7 +61,7 @@ public class Tentativas2 {
                         break;
                     }
                 case 2:
-                    for (int j = 1; j <= 5; j++){
+                    for (int j = 1; j <= 50; j++){
                         int n2 = new Random().nextInt(50);
                         System.out.println("Digite um número: ");
                         try {
@@ -140,7 +92,7 @@ public class Tentativas2 {
                         break;
                     }
                 case 3:
-                    for (int k = 1; k <= 5; k++){
+                    for (int k = 1; k <= 100; k++){
                         int n3 = new Random().nextInt(100);
                         System.out.println("Digite um número: ");
                         try {
@@ -171,7 +123,7 @@ public class Tentativas2 {
                         break;
                     }
                 default:
-                    System.out.println("Não tem essa opção");
+                    //System.out.println("Não tem essa opção");
                     break;
             }
 

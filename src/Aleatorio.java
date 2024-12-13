@@ -5,7 +5,7 @@ public class Aleatorio {
     public static void main(String[] args) {
 
             Scanner scanner = new Scanner(System.in);
-            Random random = new Random();
+            Random random = new Random(10);
             int numero = numeroEscolhido();
 
 
@@ -25,7 +25,7 @@ public class Aleatorio {
             for (int i = 1; i <= 10; i++){
                 int palpite = scanner.nextInt();
                 if (palpite > numero){
-                    System.out.println("O número é menos, palpites feitos: " + i);
+                    System.out.println("O número é menor, palpites feitos: " + i);
                 } else if (palpite < numero){
                     System.out.println("O número é maior, palpites feitos: " + i);
                 } else if (palpite == numero) {
@@ -37,6 +37,6 @@ public class Aleatorio {
     }
 
     private static int numeroEscolhido(){
-        return new Random().nextInt(11);
+        return new Random().nextInt(10);
     }
 }
