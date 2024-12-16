@@ -21,7 +21,7 @@ public class Aleatorio {
             System.out.println("Bora jogar " + nome + "\nVou te explicar o jogo \nEu vou escolher um número de 0 a 10, e você " + nome + " tem que adivinhar!!");
 
 
-            //
+            // Loop FOR para informar que o usuario apos tentar ele mostra quantos palpites foram feitos
             for (int i = 1; i <= 10; i++){
                 int palpite = scanner.nextInt();
                 if (palpite > numero){
@@ -36,6 +36,7 @@ public class Aleatorio {
 
     }
 
+    // Funcao criada fora sortear os numeros
     private static int numeroEscolhido(){
         return new Random().nextInt(10);
     }

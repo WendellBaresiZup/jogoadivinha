@@ -1,54 +1,114 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+
+    static int chute = 0;
+    static int numero = 0;
+    static int tentativas = 0;
+    static int pontos = 0;
+    static String nome;
+
     public static void main(String[] args) {
 
-        // classe Scanner para o usurio ter que colocar dados
+        // Variaveis
         Scanner scanner = new Scanner(System.in);
-        // classe random - essa classe vai gerar numeros aleatórios
-        Random random = new Random();
+        numero = new Random().nextInt(10);
+
+        System.out.println("Digite seu nome?");
+        nome = scanner.nextLine();
+
+        System.out.println("Bora jogar " + nome + "\nVou te explicar o jogo \nEu vou escolher um número de 0 a 10, e você tem que adivinhar!!");
+
+        prepararJogo(scanner);
 
 
-        // Criando variaveis
-
-        // Variavel de menu para escolha do usuario
-        int menu;
-
-        // Variavel para o número gerado
-        int numeroGerado;
-
-        // Variavel
-        int usuario;
-
-        System.out.println("Bem-Vindo ao jogo. Digite seu nome?");
-        String nome = scanner.nextLine();
+        System.out.println("O seu saldo de pontos foi: " + pontos);
+    }
 
 
-        System.out.println(nome + " bora jogar um jogo? \nInforme sua opção \n 1 -- SIM \n 2 -- NÃO \n");
-        // Aonde o usuario vai fazer a escolha para iniciar o jogo
-        menu = scanner.nextInt();
 
-        //
-            if (menu == 2){
-                System.out.println("Queria muito ter jogado com você " + nome + "\n Quem sabe na próxima \n");
-            } else if (menu == 1){
+    //Funçao que prepara o jogo
+    public static void prepararJogo(Scanner scanner){
 
-                System.out.println("Bora jogar " + nome + "\nVou te explicar o jogo \nEu vou escolher um número de 0 a 10, e você " + nome + " tem que adivinhar!!");
+        // Menu criado para o usuario informar seu nivel de dificuldade
+        System.out.println("Escolha uma dificuldade!");
+        System.out.println("1 = Fácil");
+        System.out.println("2 = Médio");
+        System.out.println("3 = Dificil");
+        int menu = scanner.nextInt();
 
-                numeroGerado = random.nextInt(11);
-                System.out.println("Já escolhi o número " + nome + ". Agora tente adivinhar!");
 
-                do {
-                    usuario = scanner.nextInt();
-                    if (usuario != numeroGerado){
-                        System.out.println("Não é esse...");
-                    } else {
-                        System.out.println("Parabéns " + nome + ". Você acertou o número " + numeroGerado);
-                    }
-                } while (numeroGerado != usuario);
-
+            // Estrutura SWITCH para decisao de escolha do menu
+            switch (menu){
+                case 1:
+                    tentativasJogo(scanner, 10);
+                    break;
+                case 2:
+                    tentativasJogo(scanner, 50);
+                    break;
+                case 3:
+                    tentativasJogo(scanner,100);
+                    break;
+                default:
+                    System.out.println("Não tem essa opção");
+                    break;
             }
+    }
 
+    //Funcao pergunta se usuario quer jogar novamente
+    public static void tentativasJogo(Scanner scanner, int limiteDificuldade) {
+        String jogarNovamente = "s";
+
+        // Estrutura DO.. WHILE para informar se caso o usuario quer jogar ou nao novamente. Se caso de SIM,
+        // a funcao Jogar e chamada e inicia o jogo novemnte
+        do {
+            jogar(scanner, limiteDificuldade);
+            System.out.println("Bora jogar novamente? SIM(s) ou NÃO(n)");
+            jogarNovamente = scanner.next();
+        } while (jogarNovamente.equalsIgnoreCase("s"));
+    }
+
+    // Funçao Logica do jogo
+    public static void jogar(Scanner scanner, int limiteDificuldade){
+        // Cada inicio do jogo o usuario comeca Zerado
+        tentativas = 0;
+        // Loop FOR criado para informar o usuario que ele tem direito a 5 tentativas
+        while (tentativas < 5){
+                System.out.println("Digite um número: ");
+                // Estrutura Try.. Catch, para o programa executar e nao ter quebra durante seu processo
+                try {
+                    chute = scanner.nextInt();
+                    if (chute < 1 || chute > limiteDificuldade){
+                        System.out.println("Digite um número: ");
+                        continue;
+                    }
+                    tentativas++;
+
+                    // Condicao IF para se caso o usuario acertar ele pontua e finaliza o jogo
+                    if (chute == numero){
+                        System.out.println("Parabens você acertou o número " + numero);
+                        pontos = pontos + 10;
+                        break;
+                    } else if (chute == numero - 1 || chute == numero + 1){
+                        pontos = pontos + 5;
+                    }
+
+                    // Se ele nao acertar a condicao continua e o usuario pontua se o numero for perto do que foi gerado
+                    if (chute > numero){
+                        System.out.println("Tente novamente, o número é menor, palpites feitos: " + tentativas);
+                    } else {
+                        System.out.println("Tente novamente, o número é maior, palpites feitos: " + tentativas);
+                    }
+                    // Catch para o usuario se caso nao utilizar numero, o programa informa.
+                } catch (InputMismatchException e){
+                    System.out.println("Insira um número válido.");
+                    scanner.next();
+                }
+            break;
+        }
     }
 }
+
+
